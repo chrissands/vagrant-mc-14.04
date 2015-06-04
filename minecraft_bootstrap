@@ -30,6 +30,7 @@ fi
 test -d ${WORK_DIR}/logs || mkdir -p ${WORK_DIR}/logs
 pushd ${WORK_DIR}
 
+test -f "${VERSION}" || wget ${VERSION} --quiet
 
 # Upstart manages the server process
 cat > /etc/init/minecraft.conf <<MINECRAFT_CONF
