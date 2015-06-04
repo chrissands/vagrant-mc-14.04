@@ -12,7 +12,11 @@ Vagrant.configure(2) do |config|
   config.vm.provision :shell, :path => "minecraft_bootstrap"
   config.vm.provider "virtualbox" do |v|
      v.memory = "2048"
-
+     v.customize [
+         "modifyvm", :id,
+         "--cpus", 2
+         "--pae", "on",
+     ]
   end
 
   config.vm.network "public_network", bridge: 'eth0'
