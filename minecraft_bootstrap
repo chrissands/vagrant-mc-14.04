@@ -30,9 +30,6 @@ fi
 test -d ${WORK_DIR}/logs || mkdir -p ${WORK_DIR}/logs
 pushd ${WORK_DIR}
 
-# Download the jar if it doesn't already exist
-HEADER='Referer: https://github.com/stephendotexe/vagrant_minecraft_auto_launch'
-test -f "${VERSION}" || wget --header=${HEADER} --quiet "${VERSION}"
 
 # Upstart manages the server process
 cat > /etc/init/minecraft.conf <<MINECRAFT_CONF
