@@ -22,6 +22,13 @@ apt-get install -y --no-install-recommends openjdk-7-jre-headless
 apt-get install htop
 apt-get install screen
 
+# Guest addons correct installation inside the VM
+NEWEST_VBOXGUESTADDITIONS_DIR=`find /opt/ -maxdepth 1 -mindepth 1 -name "VBoxGuestAdditions-*" | tail -n 1`;
+if [[ ! -d "/usr/lib/VBoxGuestAdditions" && -n "$NEWEST_VBOXGUESTADDITIONS_DIR" ]];
+then
+    ln -s ${NEWEST_VBOXGUESTADDITIONS_DIR}/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
+fi
+
 # We want to save persistent files, so we'll symlink over that directory
 if [[ -z "${TRAVIS}" ]]; then
   ln -s /vagrant/persistent_files ${WORK_DIR}
@@ -90,4 +97,5 @@ DONE
 
 chmod +x /etc/update-motd.d/00-header
 chmod 755 /etc/update-motd.d/00-header
+
 
